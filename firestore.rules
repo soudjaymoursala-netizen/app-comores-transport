@@ -1,0 +1,57 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    match /users/{userId} {
+      function estProprietaire() {
+        return request.auth != null && request.auth.uid == userId;
+      }
+
+      // `verificationStatus` ne doit jamais pouvoir être modifié par le
+      // client une fois défini : seule une Cloud Function (Admin SDK,
+      // qui contourne ces règles) peut le faire après validation manuelle
+      // d'un administrateur. On autorise cependant la création initiale
+      // du profil chauffeur par le client via `devenirChauffeur()`
+      // (lib/services/user_service.dart), à condition que le statut de
+      // départ soit bien "non_soumis" et non une valeur déjà "verifie".
+      function verificationStatusValide() {
+        return (
+          !('chauffeurProfile' in resource.data) &&
+          !('chauffeurProfile' in request.resource.data)
+        ) || (
+          ('chauffeurProfile' in resource.data) &&
+          ('chauffeurProfile' in request.resource.data) &&
+          request.resource.data.chauffeurProfile.verificationStatus ==
+            resource.data.chauffeurProfile.verificationStatus
+        ) || (
+          !('chauffeurProfile' in resource.data) &&
+          ('chauffeurProfile' in request.resource.data) &&
+          request.resource.data.chauffeurProfile.verificationStatus == 'non_soumis'
+        );
+      }
+
+      allow read: if estProprietaire();
+
+      allow create: if estProprietaire()
+        && (
+          !('chauffeurProfile' in request.resource.data) ||
+          request.resource.data.chauffeurProfile.verificationStatus == 'non_soumis'
+        );
+
+      allow update: if estProprietaire() && verificationStatusValide();
+
+      allow delete: if false;
+
+      // Infos publiques d'un chauffeur (nom, note, véhicule) lisibles par
+      // tout utilisateur authentifié sans exposer le document complet.
+      // Écrit uniquement par la Cloud Function `onUserWrite` via
+      // l'Admin SDK, qui n'est pas soumis à ces règles : `write` est donc
+      // fermé côté client dans tous les cas.
+      match /publicProfile/{document=**} {
+        allow read: if request.auth != null;
+        allow write: if false;
+      }
+    }
+  }
+}
