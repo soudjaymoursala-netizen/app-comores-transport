@@ -2,21 +2,11 @@
 // ignore_for_file: type=lint
 // ignore_for_file: lines_longer_than_80_chars, avoid_classes_with_only_static_members
 
-// GÉNÉRÉ MANUELLEMENT — À REMPLACER.
+// Options de configuration Firebase du projet `app-comores-transport`.
 //
-// Ce fichier est normalement généré automatiquement par la CLI FlutterFire :
-//
-//   dart pub global activate flutterfire_cli
-//   flutterfire configure --project=<id-du-projet-firebase>
-//
-// Cette commande nécessite une authentification interactive Google Cloud
-// et un vrai projet Firebase, ce qui n'est pas disponible dans cet
-// environnement d'exécution. Les valeurs ci-dessous sont des placeholders
-// qui font échouer `Firebase.initializeApp()` intentionnellement (plutôt
-// que d'utiliser silencieusement un faux projet) tant que la commande
-// `flutterfire configure` n'a pas été lancée avec de vrais identifiants.
-//
-// Voir README.md, section "Configuration Firebase" pour la procédure.
+// Valeurs reprises de android/app/google-services.json et
+// ios/Runner/GoogleService-Info.plist (fournies par la console Firebase).
+// Seuls Android et iOS sont ciblés par ce projet (pas de web/desktop).
 
 import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
@@ -25,7 +15,10 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions ne sont pas configurées pour le web : ce '
+        'projet ne cible que Android et iOS.',
+      );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -35,33 +28,29 @@ class DefaultFirebaseOptions {
       default:
         throw UnsupportedError(
           'DefaultFirebaseOptions ne sont pas configurées pour cette '
-          'plateforme. Lancez `flutterfire configure` pour la générer.',
+          'plateforme.',
         );
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'REMPLACER_APRES_FLUTTERFIRE_CONFIGURE',
-    appId: 'REMPLACER_APRES_FLUTTERFIRE_CONFIGURE',
-    messagingSenderId: 'REMPLACER_APRES_FLUTTERFIRE_CONFIGURE',
-    projectId: 'REMPLACER_APRES_FLUTTERFIRE_CONFIGURE',
-    storageBucket: 'REMPLACER_APRES_FLUTTERFIRE_CONFIGURE',
-  );
-
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'REMPLACER_APRES_FLUTTERFIRE_CONFIGURE',
-    appId: 'REMPLACER_APRES_FLUTTERFIRE_CONFIGURE',
-    messagingSenderId: 'REMPLACER_APRES_FLUTTERFIRE_CONFIGURE',
-    projectId: 'REMPLACER_APRES_FLUTTERFIRE_CONFIGURE',
-    storageBucket: 'REMPLACER_APRES_FLUTTERFIRE_CONFIGURE',
+    apiKey: 'AIzaSyDIVVdphH_OW0yxyNJvEV2cGPFSdSuQfSg',
+    appId: '1:34977625962:android:1d538d3d35c5dc87c35713',
+    messagingSenderId: '34977625962',
+    projectId: 'app-comores-transport',
+    storageBucket: 'app-comores-transport.firebasestorage.app',
+    databaseURL:
+        'https://app-comores-transport-default-rtdb.europe-west1.firebasedatabase.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'REMPLACER_APRES_FLUTTERFIRE_CONFIGURE',
-    appId: 'REMPLACER_APRES_FLUTTERFIRE_CONFIGURE',
-    messagingSenderId: 'REMPLACER_APRES_FLUTTERFIRE_CONFIGURE',
-    projectId: 'REMPLACER_APRES_FLUTTERFIRE_CONFIGURE',
-    storageBucket: 'REMPLACER_APRES_FLUTTERFIRE_CONFIGURE',
+    apiKey: 'AIzaSyAvpIWj_niEK67oJd92xgx_bU1vFl81UH8',
+    appId: '1:34977625962:ios:cceed7e297a072d4c35713',
+    messagingSenderId: '34977625962',
+    projectId: 'app-comores-transport',
+    storageBucket: 'app-comores-transport.firebasestorage.app',
+    databaseURL:
+        'https://app-comores-transport-default-rtdb.europe-west1.firebasedatabase.app',
     iosBundleId: 'com.appcomorestransport.app',
   );
 }

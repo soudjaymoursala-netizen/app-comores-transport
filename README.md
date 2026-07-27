@@ -51,31 +51,32 @@ besoin). Cette librairie sera ajoutée au `pubspec.yaml` au démarrage du
 module Dispatch, pas avant, pour ne pas alourdir ce module Auth avec une
 dépendance inutilisée.
 
-## Configuration Firebase (à faire avant de lancer l'app)
+## Configuration Firebase
 
-Le fichier `lib/firebase_options.dart` fourni est un **placeholder** :
-il fait volontairement échouer `Firebase.initializeApp()` tant qu'il n'a
-pas été régénéré avec un vrai projet Firebase (impossible à créer depuis
-cet environnement, qui n'a pas d'accès interactif à un compte Google
-Cloud).
+Le projet est connecté au projet Firebase réel **app-comores-transport**
+(n° 34977625962, Firestore en `europe-west9`, Realtime Database en
+`europe-west1`). `lib/firebase_options.dart`,
+`android/app/google-services.json` et `ios/Runner/GoogleService-Info.plist`
+contiennent les vraies valeurs de config (Android : package
+`com.appcomorestransport.app` ; iOS : bundle `com.appcomorestransport.app`).
 
-1. Créer un projet Firebase sur https://console.firebase.google.com
-2. Activer **Authentication → Phone** et **Cloud Firestore**.
-3. Installer la CLI FlutterFire puis lancer, à la racine du projet :
-   ```bash
-   dart pub global activate flutterfire_cli
-   flutterfire configure --project=<id-du-projet-firebase>
-   ```
-   Cela régénère `lib/firebase_options.dart` et télécharge
-   `android/app/google-services.json` /
-   `ios/Runner/GoogleService-Info.plist` (fichiers volontairement exclus
-   du dépôt via `.gitignore`, car spécifiques au projet Firebase réel).
-4. Mettre à jour `.firebaserc` avec l'ID du projet.
-5. Déployer les règles Firestore :
+Ces fichiers sont volontairement commités : ce sont des identifiants
+client (pas des secrets serveur), la vraie protection venant des règles
+Firestore et des restrictions d'API key. **Recommandation** : dans Google
+Cloud Console → APIs & Services → Identifiants, restreindre chaque clé API
+Firebase à son package Android / bundle iOS respectif, si ce n'est pas
+déjà fait.
+
+Reste à faire manuellement (CLI Firebase non utilisable depuis cet
+environnement, faute d'authentification navigateur) :
+
+1. Déployer les règles Firestore — soit en collant le contenu de
+   `firestore.rules` dans Firebase Console → Firestore → Règles → Publier,
+   soit depuis une machine authentifiée :
    ```bash
    firebase deploy --only firestore:rules
    ```
-6. Installer et déployer les Cloud Functions :
+2. Installer et déployer les Cloud Functions :
    ```bash
    cd functions && npm install && cd ..
    firebase deploy --only functions

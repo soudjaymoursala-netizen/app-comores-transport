@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "34977625962",
+    "firebase_url": "https://app-comores-transport-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "app-comores-transport",
+    "storage_bucket": "app-comores-transport.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:34977625962:android:1d538d3d35c5dc87c35713",
+        "android_client_info": {
+          "package_name": "com.appcomorestransport.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIVVdphH_OW0yxyNJvEV2cGPFSdSuQfSg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

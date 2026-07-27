@@ -42,11 +42,10 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-# Firebase — fichiers de configuration spécifiques au projet réel, générés
-# via `flutterfire configure` / téléchargés depuis la console Firebase.
-# Ne jamais committer ces fichiers (contiennent des identifiants de projet).
-android/app/google-services.json
-ios/Runner/GoogleService-Info.plist
+# Firebase — google-services.json et GoogleService-Info.plist sont commités
+# volontairement (projet app-comores-transport) : ce sont des identifiants
+# client, pas des secrets serveur ; la protection réelle vient des règles
+# Firestore et des restrictions d'API key côté Google Cloud Console.
 .firebase/
 firebase-debug.log
 firestore-debug.log
