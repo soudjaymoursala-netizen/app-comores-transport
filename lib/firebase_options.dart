@@ -62,6 +62,6 @@ class DefaultFirebaseOptions {
     messagingSenderId: 'REMPLACER_APRES_FLUTTERFIRE_CONFIGURE',
     projectId: 'REMPLACER_APRES_FLUTTERFIRE_CONFIGURE',
     storageBucket: 'REMPLACER_APRES_FLUTTERFIRE_CONFIGURE',
-    iosBundleId: 'km.comorestransport.appComoresTransport',
+    iosBundleId: 'com.appcomorestransport.app',
   );
 }

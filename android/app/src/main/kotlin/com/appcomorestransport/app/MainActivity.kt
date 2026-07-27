@@ -1,4 +1,4 @@
-package km.comorestransport.app_comores_transport
+package com.appcomorestransport.app
 
 import io.flutter.embedding.android.FlutterActivity
 

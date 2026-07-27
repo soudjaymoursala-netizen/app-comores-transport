@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "km.comorestransport.app_comores_transport"
+    namespace = "com.appcomorestransport.app"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -21,7 +21,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "km.comorestransport.app_comores_transport"
+        applicationId = "com.appcomorestransport.app"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         // minSdk 23 requis par firebase_auth (Firebase Android SDK).
