@@ -41,13 +41,15 @@ ligne) suffit pour le profil utilisateur, qui change rarement.
 Pour le module suivant (Dispatch temps réel), où la contrainte est
 explicitement de **ne jamais perdre une réservation en cours** lors
 d'une coupure réseau/électrique, ce cache ne suffit plus : il faut un
-stockage local avec des garanties transactionnelles fortes. Recommandation
-: **Drift** (ORM SQL sur SQLite, transactions ACID, mature et activement
-maintenu). Alternatives évaluées : Isar (rapide mais maintenance
-communautaire incertaine depuis 2024) et Hive (trop simple pour les
-requêtes par statut/date dont le dispatch aura besoin). Cette librairie
-sera ajoutée au `pubspec.yaml` au démarrage du module Dispatch, pas
-avant, pour ne pas alourdir ce module Auth avec une dépendance inutilisée.
+stockage local avec des garanties transactionnelles fortes.
+
+**Décision validée : Drift** (ORM SQL sur SQLite, transactions ACID,
+mature et activement maintenu). Alternatives évaluées et écartées : Isar
+(rapide mais maintenance communautaire incertaine depuis 2024) et Hive
+(trop simple pour les requêtes par statut/date dont le dispatch aura
+besoin). Cette librairie sera ajoutée au `pubspec.yaml` au démarrage du
+module Dispatch, pas avant, pour ne pas alourdir ce module Auth avec une
+dépendance inutilisée.
 
 ## Configuration Firebase (à faire avant de lancer l'app)
 
